@@ -1,0 +1,17 @@
+version: 2
+models:
+  - name: fct_consumption_daily
+    description: Per-customer per-day consumption with peak/off-peak.
+  - name: fct_load_profile
+    description: Average load curve by hour × ACORN segment × season.
+  - name: fct_anomalies
+    description: Zero-usage and spike (>3σ) day flags per meter.
+  - name: fct_invoice_monthly
+    description: Monthly invoice per customer from rated intervals.
+    columns:
+      - name: amount_pounds
+        description: Monthly billed amount in GBP.
+  - name: fct_revenue_monthly
+    description: Revenue by month × segment × tariff.
+  - name: fct_ar_aging
+    description: Synthetic receivables aging derived from pay_propensity.
