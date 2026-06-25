@@ -16,10 +16,13 @@ models:
     columns:
       - name: customer_id
         tests: [not_null, unique]
+      - name: lclid
+        tests: [not_null, unique]
       - name: segment
         tests:
           - accepted_values:
-              values: ['Affluent', 'Comfortable', 'Adversity']
+              arguments:
+                values: ['Affluent', 'Comfortable', 'Adversity']
   - name: dim_premise
     columns:
       - name: premise_id
@@ -31,10 +34,12 @@ models:
       - name: tariff_code
         tests:
           - accepted_values:
-              values: ['Std', 'ToU']
+              arguments:
+                values: ['Std', 'ToU']
   - name: dim_tariff
     columns:
       - name: band
         tests:
           - accepted_values:
-              values: ['High', 'Normal', 'Low', 'Std']
+              arguments:
+                values: ['High', 'Normal', 'Low', 'Std']

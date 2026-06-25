@@ -13,8 +13,10 @@ with base as (
     from {{ ref('stg_meter_readings') }} r
     join {{ ref('dim_customer') }} c
         on r.lclid = c.lclid
+    -- one active contract per customer (sub-project 1 guarantees 1:1); filter defends against fan-out
     join {{ ref('dim_contract') }} ctr
         on c.customer_id = ctr.customer_id
+        and ctr.status = 'active'
     left join {{ ref('br_tariff_calendar') }} cal
         on ctr.tariff_code = 'ToU'
         and cal.tariff_date = r.reading_date
