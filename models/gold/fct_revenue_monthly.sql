@@ -9,4 +9,5 @@ join {{ ref('dim_customer') }} c
     on i.customer_id = c.customer_id
 join {{ ref('dim_contract') }} ctr
     on i.customer_id = ctr.customer_id
+    and ctr.status = 'active'
 group by i.invoice_month, c.segment, ctr.tariff_code

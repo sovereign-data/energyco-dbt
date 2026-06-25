@@ -23,3 +23,5 @@ The Chameleon platform clones this repo, overwrites `profiles.yml` with a JWT
 profile, sets `DBT_TARGET_CATALOG=ws_<slug>`, and runs `dbt build`. Prerequisites
 (sub-project 2b): the landing tool has populated `energyco-raw`, and `energyco-raw`
 is in SQE's `[storage.tvf].allowed_object_store_prefixes`.
+
+> **2b validation note:** bronze uses `read_parquet('s3://energyco-raw/raw/<table>/')` (directory form — SQE rejects globs). The `meter_readings` prefix is Hive-partitioned (`year=YYYY/month=M/`); on the FIRST live `dbt build`, confirm SQE's `read_parquet` recurses into those partition subdirectories. If it does not, land `meter_readings` unpartitioned (sub-project 1 `--scale`) or point the source at the partition level. The flat dim prefixes (customer/premise/contract/tariff/tariff_calendar) are unaffected.

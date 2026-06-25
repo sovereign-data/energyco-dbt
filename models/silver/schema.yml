@@ -40,6 +40,7 @@ models:
     columns:
       - name: band
         tests:
+          - unique
           - accepted_values:
               arguments:
                 values: ['High', 'Normal', 'Low', 'Std']
