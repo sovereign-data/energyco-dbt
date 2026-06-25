@@ -1,0 +1,15 @@
+trino:
+  target: dev
+  outputs:
+    dev:
+      type: trino
+      method: ldap
+      host: chameleon.local
+      port: 443
+      http_scheme: https
+      user: "{{ env_var('TRINO_USER', 'dbt') }}"
+      password: "{{ env_var('TRINO_PASSWORD', 'x') }}"
+      database: "{{ env_var('DBT_TARGET_CATALOG', 'main_warehouse') }}"
+      schema: "{{ env_var('DBT_TARGET_SCHEMA', 'dev') }}"
+      threads: 4
+      prepared_statements_enabled: false
