@@ -1,7 +1,0 @@
-Metadata-Version: 2.4
-Name: energyco-dbt
-Version: 0.1.0
-Summary: EnergyCo demo — dbt medallion over landed smart-meter data
-Requires-Python: >=3.11
-Requires-Dist: dbt-core>=1.11.7
-Requires-Dist: dbt-trino>=1.10.1

@@ -1,7 +1,0 @@
-README.md
-pyproject.toml
-energyco_dbt.egg-info/PKG-INFO
-energyco_dbt.egg-info/SOURCES.txt
-energyco_dbt.egg-info/dependency_links.txt
-energyco_dbt.egg-info/requires.txt
-energyco_dbt.egg-info/top_level.txt
