@@ -1,0 +1,22 @@
+version: 2
+models:
+  - name: br_meter_readings
+    description: Raw half-hourly meter readings landed in energyco-raw.
+    columns:
+      - name: lclid
+        description: Household/meter identifier.
+      - name: kwh
+        description: Half-hourly consumption in kWh (NULL where the source had gaps).
+  - name: br_customer
+    description: Synthetic customer dimension (PII-free, deterministic).
+    columns:
+      - name: customer_id
+        tests: [not_null]
+  - name: br_premise
+    description: Synthetic premise dimension (1:1 with household).
+  - name: br_contract
+    description: Synthetic contract dimension; tariff_code is Std or ToU.
+  - name: br_tariff
+    description: Tariff price bands (dToU High/Normal/Low + flat Std).
+  - name: br_tariff_calendar
+    description: 2013 dToU day-ahead band per date.
