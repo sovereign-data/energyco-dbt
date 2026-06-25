@@ -1,0 +1,40 @@
+version: 2
+models:
+  - name: stg_meter_readings
+    description: Typed, deduplicated half-hourly readings; negative kWh nulled, gaps kept.
+    columns:
+      - name: lclid
+        tests: [not_null]
+  - name: int_consumption_daily
+    description: Daily kWh per meter with peak/off-peak split and completeness ratio.
+  - name: int_rated_intervals
+    description: Each interval priced against its tariff (Std flat or ToU day-ahead band).
+    columns:
+      - name: price_pence_per_kwh
+        tests: [not_null]
+  - name: dim_customer
+    columns:
+      - name: customer_id
+        tests: [not_null, unique]
+      - name: segment
+        tests:
+          - accepted_values:
+              values: ['Affluent', 'Comfortable', 'Adversity']
+  - name: dim_premise
+    columns:
+      - name: premise_id
+        tests: [not_null, unique]
+  - name: dim_contract
+    columns:
+      - name: contract_id
+        tests: [not_null, unique]
+      - name: tariff_code
+        tests:
+          - accepted_values:
+              values: ['Std', 'ToU']
+  - name: dim_tariff
+    columns:
+      - name: band
+        tests:
+          - accepted_values:
+              values: ['High', 'Normal', 'Low', 'Std']
